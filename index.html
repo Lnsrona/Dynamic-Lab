@@ -16,8 +16,31 @@
             <h1>Dinner planner</h1>
         </div>
         <div class="row">
-            <div class="column-xs-200"></div>
-            <div class="column-xs-768">
+            <div class="col-md-2">
+                <h2>My Dinner</h2>
+                <label for="numPplInput"><span>People</span></label>
+                <span><input id="numPplInput" type="number" min="1" step="1"/></span>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Dish Name</th>
+                        <th>Cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                    </tr>
+                    <tr>
+                        <td>Pending</td>
+                        <td>0.00</td>
+                    </tr>
+                    </tbody>
+                    <button class="btn">Confirm DInner</button>
+                </table>
+            </div>
+            <div class="col-md-10" >
                 <div id="exampleView">
                     <div>
                         Number of guests: <span id="numberOfGuests"></span>
@@ -32,13 +55,13 @@
                 
                 <div id="selectionView">
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <input type="text" class="form-control" id="nameKeyword"></input>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-md-1">
                             <button class="btn">search</button>
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-md-7">
                           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                               Course type
                             <span class="caret"></span></button>
@@ -49,29 +72,27 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="row">
                         <ul class="list-group">
-  <li class="list-group-item list-group-item-success">
-      <div>
-          <img src="images/bakedbrie.jpg"></div>
-          <h3>Bakedbrie</h3>
-      </div>
-  </li>
-  <li class="list-group-item list-group-item-info">      <div>
-          <img src="images/icecream.jpg"></div>
-          <h3>Icecream</h3>
-      </div></li>
-  <li class="list-group-item list-group-item-warning">      <div>
-          <img src="images/meatballs.jpg"></div>
-          <h3>Meatball</h3>
-      </div></li>
-  <li class="list-group-item list-group-item-danger">      <div>
-          <img src="images/toast.jpg"></div>
-          <h3>Toast</h3>
-      </div></li>
-</ul>
-                    </div>
-
+                            <li class="list-group-item">
+                                    <div> 
+                                        <img src="images/bakedbrie.jpg"/>
+                                        <h3>Bakedbrie</h3>
+                                    </div>
+                            </li>
+                            <li class="list-group-item list-group-item-info">      <div>
+                                    <img src="images/icecream.jpg"/>
+                                    <h3>Icecream</h3>
+                                </div></li>
+                            <li class="list-group-item list-group-item-warning">      <div>
+                                    <img src="images/meatballs.jpg"/>
+                                    <h3>Meatball</h3>
+                                </div></li>
+                            <li class="list-group-item list-group-item-danger">      <div>
+                                    <img src="images/toast.jpg"/>
+                                    <h3>Toast</h3>
+                                </div>
+                            </li>
+                        </ul>
                 </div>
             </div>
         </div>        
