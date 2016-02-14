@@ -27,7 +27,8 @@ var DinnerModel = function() {
        return this.menuDishes;
 	}
 
-	//Returns all ingredients for all the dishes on the menu.
+	// Returns all ingredients for all the dishes on the menu.
+    // NOTE, This methods returns the ingredients PER PERSON
 	this.getAllIngredients = function() {
 		var ingreds = [];
         var nonDup = [];
@@ -41,10 +42,11 @@ var DinnerModel = function() {
            if (index == 0 || value.id > array[index-1].id)
            {
                nonDup.push(value.clone());
+               // nonDup[nonDup.length-1].quantity *= this.numberGuests;
            } else
            {
                var nid = nonDup.findIndex(function(ind){return ind.id == value.id;});
-               nonDup[nid].quantity += value.quantity;
+               nonDup[nid].quantity += value.quantity; // *this.numberGuests
            }
         });
         return nonDup;
