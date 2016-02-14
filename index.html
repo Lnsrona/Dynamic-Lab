@@ -12,18 +12,69 @@
   </head>
   <body>
 	<div class="container">
-		<h1>Dinner planner</h1>
-		<div id="exampleView">
-			<div>
-				Number of guests: <span id="numberOfGuests"></span>
-			</div>
-			<div>
-          <button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
-				<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
-			</div>
-            <ul id="guestList" class="list-view">
-            </ul>
-		</div>
+        <div class="row">		
+            <h1>Dinner planner</h1>
+        </div>
+        <div class="row">
+            <div class="column-xs-200"></div>
+            <div class="column-xs-768">
+                <div id="exampleView">
+                    <div>
+                        Number of guests: <span id="numberOfGuests"></span>
+                    </div>
+                    <div>
+                <button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+                        <button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                    <ul id="guestList" class="list-view">
+                    </ul>
+                </div>
+                
+                <div id="selectionView">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="nameKeyword"></input>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn">search</button>
+                        </div>
+                        <div class="col-sm-7">
+                          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                              Course type
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Main</a></li>
+                                <li><a href="#">SomethingElse0</a></li>
+                                <li><a href="#">SomethingElse1/a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="list-group">
+  <li class="list-group-item list-group-item-success">
+      <div>
+          <img src="images/bakedbrie.jpg"></div>
+          <h3>Bakedbrie</h3>
+      </div>
+  </li>
+  <li class="list-group-item list-group-item-info">      <div>
+          <img src="images/icecream.jpg"></div>
+          <h3>Icecream</h3>
+      </div></li>
+  <li class="list-group-item list-group-item-warning">      <div>
+          <img src="images/meatballs.jpg"></div>
+          <h3>Meatball</h3>
+      </div></li>
+  <li class="list-group-item list-group-item-danger">      <div>
+          <img src="images/toast.jpg"></div>
+          <h3>Toast</h3>
+      </div></li>
+</ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>        
 	</div>
 
     <!-- jQuery -->
