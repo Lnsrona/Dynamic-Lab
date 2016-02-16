@@ -12,9 +12,16 @@
   </head>
   <body>
 	<div class="container">
-        <div class="row">		
-            <h1>Dinner planner</h1>
-        </div>
+		<table width="100%" border="0">
+	
+			<tr>
+				<td height="80" bgColor=#1E90FF><h1><a href="file:///C|/wamp/www/index1.html">&nbsp;HOMELETTE</a></h1></td>
+				<td bgColor=#1E90FF>
+				From the best chefs in the world directly into your kitchen
+				</td>
+			</tr>
+		</table>
+<!-- style="background:#1E90FF" -->		
         <div class="row">
             <div class="col-md-2">
                 <h2>My Dinner</h2>
@@ -34,10 +41,15 @@
                     </tr>
                     </tbody>
                 </table>
-                <button class="btn">Confirm Dinner</button>
+				<div>
+					SEK: <span id="Cost"></span>
+				</div>
+				
+                <button>Confirm Dinner</button>
             </div>
             <div class="col-md-10" >
-                <div id="exampleView">
+				
+<!--                <div id="exampleView">
                     <div>
                         Number of guests: <span id="numberOfGuests"></span>
                     </div>
@@ -48,9 +60,10 @@
                     <ul id="guestList" class="list-view">
                     </ul>
                 </div>
-                
+-->                
                 <div id="selectionView">
-                    <div class="row">
+					<div class="row">
+						<h3>SELECT DISH</h3>
                         <div class="col-md-4">
                             <input type="text" class="form-control" id="nameKeyword"></input>
                         </div>
@@ -68,7 +81,42 @@
                             </ul>
                         </div>
                     </div>
-                        <ul class="list-group">
+				
+				<table class="table">
+					<tr>
+						<td>&nbsp
+						</td>
+					</tr>
+				</table>
+					
+						<div id="list-group-item">
+							<div class="col-md-3">
+								<div>
+									<img src="images/bakedbrie.jpg"/>
+									<h4>Bakedbrie</h4>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div>
+									<img src="images/icecream.jpg"/>
+                                    <h4>Icecream</h4>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div>
+									<img src="images/meatballs.jpg"/>
+                                    <h4>Meatball</h4>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div>
+									<img src="images/toast.jpg"/>
+                                    <h4>Toast</h4>
+								</div>
+							</div>
+						</div>
+   
+<!--						<ul class="list-group">
                             <li class="list-group-item">
                                     <div> 
                                         <img src="images/bakedbrie.jpg"/>
@@ -89,6 +137,7 @@
                                 </div>
                             </li>
                         </ul>
+-->						
                 </div>
             </div>
         </div>        
