@@ -8,16 +8,28 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-
+	
+	<style type="text/css">
+		a:link { 
+			color:#000000; 
+			TEXT-DECORATION:none
+		}
+		.colororange {
+		background-color:#ff9900;
+		filter: alpha(opacity=80);
+		opacity: 0.8;
+		}
+	</style>
+	
   </head>
   <body>
 	<div class="container">
 		<table width="100%" border="0">
 	
 			<tr>
-				<td height="80" bgColor=#1E90FF><h1><a href="file:///C|/wamp/www/index1.html">&nbsp;HOMELETTE</a></h1></td>
-				<td bgColor=#1E90FF>
-				From the best chefs in the world directly into your kitchen
+				<td height="80" class="colororange"><h1><a href="file:///C|/wamp/www/index1.html">&nbsp;HOMELETTE</a></h1></td>
+				<td class="colororange">
+					<b>From the best chefs in the world directly into your kitchen</b>
 				</td>
 			</tr>
 		</table>
@@ -63,7 +75,7 @@
 -->                
                 <div id="selectionView">
 					<div class="row">
-						<h3>SELECT DISH</h3>
+						<h3>&nbsp SELECT DISH</h3>
                         <div class="col-md-4">
                             <input type="text" class="form-control" id="nameKeyword"></input>
                         </div>
