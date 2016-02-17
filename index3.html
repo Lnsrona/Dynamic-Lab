@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	
+	<style type="text/css">
+		a:link { 
+			color:#000000; 
+			TEXT-DECORATION:none
+		}
+		.background {
+		background-image:url(images/index1.jpg);
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		background-size: 130%;
+		}
+		.colororange {
+		background-color:#ff9900;
+		filter: alpha(opacity=80);
+		opacity: 0.8;
+		}
+		.colorwhite {
+		background-color:#FFFFFF;
+		filter: alpha(opacity=80);
+		opacity: 0.8;
+		}
+		.colorgrey {
+		background-color:#D8D8D8;
+		filter: alpha(opacity=80);
+		opacity: 0.8;
+		}
+	</style>
+
+  </head>
+  <body>
+	<div class="container">
+		<div style="border: 3px solid;">
+		<table width="100%">
+	
+			<tr>
+				<td height="80" class="colorgrey" style="border-bottom:3px solid black"><h1><a href="file:///C|/wamp/www/index1.html">&nbsp;HOMELETTE</a></h1></td>
+				<td class="colorgrey" style="border-bottom:3px solid black">
+				<I><b>From the best chefs in the world directly into your kitchen</b></I>
+				</td>
+			</tr>
+		</div>
+		</table>
+		
+        <div class="row">
+            <div class="col-md-2">
+                <h2>My Dinner</h2>
+                <label for="numPplInput"><span>People</span></label>
+                <span><input id="numPplInput" type="number" min="1" step="1"/></span>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Dish Name</th>
+                        <th>Cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>          
+                    <tr>
+                        <td>Pending</td>
+                        <td>0.00</td>
+                    </tr>
+                    </tbody>
+                </table>
+				<div>
+					SEK: <span id="Cost"></span>
+				</div>
+				
+                <button>Confirm Dinner</button>
+            </div>
+            <div class="col-md-10" >               
+                <div id="selectionView">
+				<div style="border: 3px solid;">
+				<table class="table" border="0">
+					<tr>
+						<td width="40%">
+							<h2>LASAGNE</h2>
+							<img src="file:///C|/wamp/www/bakedbrie.jpg">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do wiusmod tempor incidicunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<button>back to Select Dish</button>
+						</td>
+						<td class="colororange" style="border:3px solid black">
+							<h4>INGREDIENTS FOR 4 PEOPLE</h4>
+							<hr/ width ="100%" align='left'>
+							<table width="100%" align="left">
+						  <tr>
+						    <td>2 tbsp</td>
+						    <td width="60%">olive oil</td>
+						    <td>SEK</td>
+						    <td>0.20</td>
+					      </tr>
+						  <tr>
+						    <td>750 g</td>
+						    <td>lean beef mince</td>
+						    <td>SEK</td>
+						    <td>10.00</td>
+					      </tr>
+						  <tr>
+						    <td>90 g</td>
+						    <td>pack rosclutto</td>
+						    <td>SEK</td>
+						    <td>15.00</td>
+					      </tr>
+						  <tr>
+						    <td>100 ml</td>
+						    <td>tomato sauce</td>
+						    <td>SEK</td>
+						    <td>10.00</td>
+					      </tr>
+						  <tr>
+						    <td>200 ml</td>
+						    <td>hot beef stock</td>
+						    <td>SEK</td>
+						    <td>20.00</td>
+					      </tr>
+						  <tr>
+						    <td>300 g</td>
+						    <td>fresh pck lasagne sheets</td>
+						    <td>SEK</td>
+						    <td>5.00</td>
+					      </tr>
+						  <tr>
+						    <td>125 g</td>
+						    <td>ball mozzarella</td>
+						    <td>SEK</td>
+						    <td>12.00</td>
+					      </tr>
+						  <tr>
+						    <td>100 ml</td>
+						    <td>white sauce</td>
+						    <td>SEK</td>
+						    <td>5.00</td>
+					      </tr>
+						  <tr>
+						    <td><hr/ width ="100%" align='left'></td>
+							<td><hr/ width ="100%" align='left'></td>
+						    <td><hr/ width ="100%" align='left'></td>
+						    <td><hr/ width ="100%" align='left'></td>
+						  </tr>
+						  <tr>
+						    <td width="60%"><button>Confirm Dish</button></td>
+						    <td width="10%"></td>
+						    <td width="15%">SEK</td>
+							<td width="15%">77.20</td>
+					      </tr>
+						  </table>
+                        </td>
+						
+						
+					</tr>
+					<tr>
+						<td><h2>PREPARATION</h2></td>
+						<td></td>
+					</tr>
+				</table>
+						</td>
+					</tr>
+				</table>
+   				</div>	
+                </div>
+            </div>
+        </div>        
+	</div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/exampleView.js"></script>
+	<script src="js/view/exampleViewController.js"></script>
+  </body>
+</html>
