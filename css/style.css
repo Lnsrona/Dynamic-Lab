@@ -1,0 +1,23 @@
+a:link { 
+    color:#000000; 
+    TEXT-DECORATION:none
+}
+
+.colororange {
+background-color:#ff9900;
+filter: alpha(opacity=80);
+opacity: 0.8;
+}
+
+.colorwhite {
+background-color:#FFFFFF;
+filter: alpha(opacity=80);
+opacity: 0.8;
+}
+
+.background {
+background-image:url(images/index1.jpg);
+background-repeat:no-repeat;
+background-attachment:fixed;
+background-size: 130%;
+}
