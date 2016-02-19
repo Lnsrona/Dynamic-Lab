@@ -21,3 +21,21 @@ background-repeat:no-repeat;
 background-attachment:fixed;
 background-size: 130%;
 }
+
+.thumbnail .cover {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.thumbnail .cover img {
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.thumbnail .caption{
+    overflow: hidden;
+    white-space: nowrap;
+}

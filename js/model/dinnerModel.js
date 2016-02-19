@@ -86,7 +86,7 @@ var DinnerModel = function() {
 	this.getAllDishes = function (type,filter) {
 	  return $(dishes).filter(function(index,dish) {
 		var found = true;
-		if(filter){
+		if(filter && filter.length > 0){
 			found = false;
 			$.each(dish.ingredients,function(index,ingredient) {
 				if(ingredient.name.indexOf(filter)!=-1) {
@@ -98,7 +98,7 @@ var DinnerModel = function() {
 				found = true;
 			}
 		}
-	  	return dish.type == type && found;
+	  	return (type=="all" || dish.type == type) && found;
 	  });	
 	}
 

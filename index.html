@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	
+    <link rel="stylesheet" href="css/style.css">
+	
+  </head>
+  <body>
+	<div class="container">
+        <div class="page-header" id="titleBar" class="colororange">
+            <h1>HOMELETTE <br><small>From the best chefs in the world directly into your kitchen</small></h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2" id="menuPreviewPanel">
+                <div class="panel panel-default">
+                    <div class="panel-heading">My Dinner</div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <input id="numPeopleInput" type="number" min="1" step="1" class="form-control" aria-label="How many people" placeholder="How many">
+                            <span class="input-group-addon">People</span>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Dish Name</th>
+                                <th>Cost</th>
+                            </tr>
+                            </thead>
+                            <tbody>          
+                            <tr>
+                                <td>Pending</td>
+                                <td>0.00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            SEK: <span id="Cost"></span>
+                        </div>
+                        <p>&nbsp;</p>				
+                        <button type="button" class="btn btn-info">Confirm Dinner</button>
+                    </div>
+                </div>
+            </div>
+				
+			
+			
+            <div class="col-md-10" >
+                <div id="IndexView" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span >Select Dishes</span>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <input id="searchKeywordInput" type="text" class="form-control" aria-label="Dish's name here" placeholder="Dish's name...">
+                            <span class="input-group-btn">
+                                <button id="searchButton" class="btn btn-primary" type="button"><div class="glyphicon glyphicon-search"></div></button>
+                                <button id="searchTypeDropdown" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchTypePreview">Type</span> <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dish-type" >starter</a></li>
+                                    <li><a class="dish-type" >main dish</a></li>
+                                    <li><a class="dish-type" >dessert</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a class="dish-type" >all</a></li>
+                                </ul>
+                            </span>
+                        </div>                            
+                        <p>&nbsp;</p>
+                        <div class="row">
+                            <div id="dishesListView">
+                                <script id="dishPreviewTemplate" type="html">
+                                    <div id="dish_{id}" class="col-xs-6 col-md-3">
+                                        <a class="thumbnail">
+                                            <div class="cover">
+                                                <img src="images/{image}"/>
+                                            </div>
+                                            <div class="caption">
+                                                <h4>{name}</h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </script>                                                     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+	</div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+    <!-- One-function html template engine based on regex replace, MIT License -->
+	<script src="js/view/nano.js"></script>
+    
+	<script src="js/model/dinnerModel.js"></script>
+
+	<script src="js/view/IndexView.js"></script>
+	<script src="js/controller/IndexViewController.js"></script>
+  </body>
+</html>
