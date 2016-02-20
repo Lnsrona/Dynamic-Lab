@@ -4,22 +4,22 @@ a:link {
 }
 
 .colororange {
-background-color:#ff9900;
-filter: alpha(opacity=80);
-opacity: 0.8;
+    background-color:#ff9900;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
 }
 
 .colorwhite {
-background-color:#FFFFFF;
-filter: alpha(opacity=80);
-opacity: 0.8;
+    background-color:#FFFFFF;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
 }
 
 .background {
-background-image:url(images/index1.jpg);
-background-repeat:no-repeat;
-background-attachment:fixed;
-background-size: 130%;
+    background-image:url(images/index1.jpg);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size: 130%;
 }
 
 .thumbnail .cover {
@@ -36,6 +36,26 @@ background-size: 130%;
 }
 
 .thumbnail .caption{
+    height: 120px;
+    overflow: hidden;
+}
+
+.thumbnail .caption h4{
     overflow: hidden;
     white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
+}
+
+.thumbnail .caption p{
+    text-overflow: ellipsis;
+}
+
+
+.table tfoot tr th.vertical-mid {
+    vertical-align: middle;
+}
+
+.vertical-mid {
+    vertical-align: middle;
 }
