@@ -53,46 +53,97 @@
 			
 			
             <div class="col-md-10" >
-                <div id="IndexView" class="panel panel-default">
-                    <div class="panel-heading">
-                        <span >Select Dishes</span>
-                    </div>
+                <div id="IndexView" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span >Select Dishes</span>
+                        </div>
 
-                    <div class="panel-body">
-                        <div class="input-group">
-                            <input id="searchKeywordInput" type="text" class="form-control" aria-label="Dish's name here" placeholder="Dish's name...">
-                            <span class="input-group-btn">
-                                <button id="searchButton" class="btn btn-primary" type="button"><div class="glyphicon glyphicon-search"></div></button>
-                                <button id="searchTypeDropdown" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchTypePreview">Type</span> <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dish-type" >starter</a></li>
-                                    <li><a class="dish-type" >main dish</a></li>
-                                    <li><a class="dish-type" >dessert</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a class="dish-type" >all</a></li>
-                                </ul>
-                            </span>
-                        </div>                            
-                        <p>&nbsp;</p>
-                        <div class="row">
-                            <div id="dishesListView">
-                                <script id="dishPreviewTemplate" type="html">
-                                    <div id="dish_{id}" class="col-xs-6 col-md-3">
-                                        <a class="thumbnail">
-                                            <div class="cover">
-                                                <img src="images/{image}"/>
-                                            </div>
-                                            <div class="caption">
-                                                <h4>{name}</h4>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </script>                                                     
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <input id="searchKeywordInput" type="text" class="form-control" aria-label="Dish's name here" placeholder="Dish's name...">
+                                <span class="input-group-btn">
+                                    <button id="searchButton" class="btn btn-primary" type="button"><div class="glyphicon glyphicon-search"></div></button>
+                                    <button id="searchTypeDropdown" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchTypePreview">Type</span> <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dish-type" >starter</a></li>
+                                        <li><a class="dish-type" >main dish</a></li>
+                                        <li><a class="dish-type" >dessert</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a class="dish-type" >all</a></li>
+                                    </ul>
+                                </span>
+                            </div>                            
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div id="dishesListView" class="list-view">
+                                    <script class="item-template" id="dishPreviewTemplate" type="html">
+                                        <div id="dish_{id}" class="col-xs-6 col-md-3 list-view-item">
+                                            <a class="thumbnail dish-preview" data-id="{id}">
+                                                <div class="cover">
+                                                    <img src="images/{image}"/>
+                                                </div>
+                                                <div class="caption">
+                                                    <h4 class="panel-title">{name}</h4>
+                                                    <p>{description}</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </script>                                                     
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <div id="dishView" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" id="dishName">{name}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img id="dishImg" data-src="images/{image}" />
+                                    <p id="dishDescription">{description}</p>
+                                    <button id="dishBackBtn" class="btn btn-default" type="">Back to select dish</button>
+                                    <p>&nbsp;</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <b>Ingrediant for <span id="dishNumGeustCount">{numGuest}</span> people</b>
+                                        </div>
+                                        <table class="table">
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <button id="dishConfirmBtn" class="btn btn-success" type="">Confirm Dish</button>
+                                                    </td>
+                                                    <th class="vertical-mid">SEK</th>
+                                                    <th id="dishPriceSum" class="vertical-mid">{totalPrice}</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody id="ingrediantsListView" class="list-view">
+                                                <script class="item-template" id="ingrediantTrTemplate" type="html">
+                                                    <tr class="ingrediantRow">
+                                                        <td><span class="ingr-quantity">{quantity}</span>&nbsp;<span class="ingr-quant-uint">{unit}</span></td>
+                                                        <td class="ingr-name">{name}</td>
+                                                        <td>SEK</td>
+                                                        <td class="ingr-price">{price}</td>
+                                                    </tr>
+                                                </script>                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
+            
         </div>        
 	</div>
 
@@ -101,14 +152,22 @@
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
-	<!-- The application JavaScript code -->
-	<script src="js/app.js"></script>
     <!-- One-function html template engine based on regex replace, MIT License -->
-	<script src="js/view/nano.js"></script>
-    
-	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/nano.js"></script>    
 
+    <!-- Global variables which needed for cross-controller functions to work -->
+	<script src="js/global.js"></script>
+
+	<script src="js/model/dinnerModel.js"></script>
 	<script src="js/view/IndexView.js"></script>
 	<script src="js/controller/IndexViewController.js"></script>
+	<script src="js/view/DishView.js"></script>
+	<script src="js/controller/DishViewController.js"></script>
+	<script src="js/view/MenuView.js"></script>
+	<script src="js/controller/MenuViewController.js"></script>
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+    
   </body>
 </html>

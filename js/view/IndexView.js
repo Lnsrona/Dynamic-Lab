@@ -1,4 +1,5 @@
 var IndexView = function (container) {
+    this.container = container;
 	this.heading = container.find(".panel-heading");
     this.searchKeyworldInput = container.find("#searchKeywordInput");
     this.searchTypeDropdown = container.find("#searchTypeDropdown");

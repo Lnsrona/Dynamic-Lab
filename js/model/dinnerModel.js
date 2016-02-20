@@ -3,7 +3,7 @@ var DinnerModel = function() {
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
-	this.numberGuests = 0;
+	this.numberGuests = 1;
     this.menuDishes = [];
 	
 	this.setNumberOfGuests = function(num) {
@@ -60,12 +60,24 @@ var DinnerModel = function() {
         });
         return sumPrice;
 	}
+    
+    this.isDishInMenu = function (id) {
+	  for(var index in this.menuDishes){
+			if(this.menuDishes[index].id == id) {
+				return true;
+			}
+		}
+        return false;
+    }
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
+        if (this.isDishInMenu(id))
+            return false;
 		this.menuDishes.push(this.getDish(id));
         this.menuDishes.sort(function(a, b){return a.id - b.id});
+        return true;
 	}
 
 	//Removes dish from menu
@@ -104,9 +116,9 @@ var DinnerModel = function() {
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].id == id) {
-				return dishes[key];
+	  for(var index in dishes){
+			if(dishes[index].id == id) {
+				return dishes[index];
 			}
 		}
 	}
