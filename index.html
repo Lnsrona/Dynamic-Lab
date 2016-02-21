@@ -28,22 +28,38 @@
                             <span class="input-group-addon">People</span>
                         </div>
                         <table class="table table-striped">
-                            <thead>
+                           <thead>
                             <tr>
                                 <th>Dish Name</th>
                                 <th>Cost</th>
                             </tr>
                             </thead>
+			<!--				
                             <tbody>          
                             <tr>
                                 <td>Pending</td>
                                 <td>0.00</td>
                             </tr>
                             </tbody>
-                        </table>
-                        <div>
-                            SEK: <span id="Cost"></span>
-                        </div>
+			-->
+							<tfoot>
+                            <tr>              
+                            <th class="vertical-mid">SEK</th>
+                            <th id="dishPriceSum" class="vertical-mid">{totalPrice}</th>
+                            </tr>
+                            </tfoot>
+
+							<tbody id="ingrediantsListView" class="list-view">
+                                <script class="item-template" id="dishSelectedTrTemplate" type="html">
+								<tr class="dishSelectedRow">                               
+                                <td class="ingr-name">{name}</td>                               
+                                <td class="ingr-price">{price}</td>
+                                </tr>
+                            </script>                
+                            </tbody>
+
+						</table>
+                        
                         <p>&nbsp;</p>				
                         <button type="button" class="btn btn-info">Confirm Dinner</button>
                     </div>
