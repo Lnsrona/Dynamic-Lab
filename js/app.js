@@ -1,7 +1,8 @@
 $(function() {
 	//We instantiate our model
 	g_dataModel = new DinnerModel();
-	
+	g_dataModel.caculateAllDishPrice();
+    
 	//And create the needed controllers and views
 	g_indexView = new IndexView($("#IndexView"));
     
@@ -11,7 +12,7 @@ $(function() {
     
     g_dishController = new DishViewController(g_dataModel, g_dishView);
     
-    g_menuView = new MenuView("#menuPreviewPanel");
+    g_menuView = new MenuView($("#menuPreviewPanel"));
     
     g_menuController = new MenuViewController(g_dataModel, g_menuView);
 });

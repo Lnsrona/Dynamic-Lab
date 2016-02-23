@@ -5,34 +5,43 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	this.numberGuests = 1;
     this.menuDishes = [];
+    
+    this.caculateAllDishPrice = function()
+    {
+        dishes.forEach(function (dish,idx,array) {
+            dish.price = dish.ingredients.reduce(function(previousValue, ingr, currentIndex, array){
+                return previousValue + ingr.price; 
+            }, 0);
+        })
+    };
 	
 	this.setNumberOfGuests = function(num) {
 		this.numberGuests = num;
-	}
+	};
 
 	// should return 
 	this.getNumberOfGuests = function() {
 		return this.numberGuests;
-	}
+	};
 
 	//Returns the dish that is on the menu for selected type 
 	this.getSelectedDish = function(type) {
 		this.menuDishes.filter(function(index,dish) {
 	  	return dish.type == type;
 	  });
-	}
+	};
 
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
        return this.menuDishes;
-	}
+	};
 
 	// Returns all ingredients for all the dishes on the menu.
     // NOTE, This methods returns the ingredients PER PERSON
 	this.getAllIngredients = function() {
 		var ingreds = [];
         var nonDup = [];
-        this.menuDishes.each(function (dish) {
+        this.menuDishes.forEach(function (dish,index,array) {
             Array.prototype.push.apply(ingreds, dish.ingredients);
         });
         ingreds.sort(function(a, b){return a.id - b.id});
@@ -41,22 +50,23 @@ var DinnerModel = function() {
         ingreds.forEach(function (value,index,array) {
            if (index == 0 || value.id > array[index-1].id)
            {
-               nonDup.push(value.clone());
+               nonDup.push(JSON.parse(JSON.stringify(value))); // .clone()
                // nonDup[nonDup.length-1].quantity *= this.numberGuests;
            } else
            {
                var nid = nonDup.findIndex(function(ind){return ind.id == value.id;});
                nonDup[nid].quantity += value.quantity; // *this.numberGuests
+               nonDup[nid].price += value.price;
            }
         });
         return nonDup;
-	}
+	};
 
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
         var sumPrice = 0;
-        this.getAllIngredients().each(function (ingred) {
-            sumPrice += ingred.price * ingred.quantity;
+        this.getAllIngredients().forEach(function (ingred,index,array) {
+            sumPrice += ingred.price; // * ingred.quantity
         });
         return sumPrice;
 	}
