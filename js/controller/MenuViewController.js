@@ -2,6 +2,7 @@ var MenuViewController = function (model,view) {
     var controller = this;
     this.menuCost = 0;
     this.pendingCost = 0;
+//    $(view.container).hide(200);
     view.menuPriceSum.text("0.00");
     view.numPeopleInput.attr("value",model.getNumberOfGuests());
     
@@ -84,6 +85,12 @@ var MenuViewController = function (model,view) {
             }
         }
         controller.refreshMenuListViewPrices();
+        
+        this.nextPage = function () {
+            $("#MainPage").hide(200);
+            $("#ResultBar").show(200);
+        };
+        view.menuConfirmBtn.click(this.nextPage);
     };
     
     // var refreshNumberOfGuests = function()

@@ -6,5 +6,6 @@ var MenuView = function (container) {
     this.pendingDishPrice = container.find("#pendingDishPrice");
     this.pendingRow = container.find("#pendingRow");
     this.menuListView = container.find("#menuListView");
+    this.menuConfirmBtn = container.find("#MenuConfirmBtn");
 }
  
