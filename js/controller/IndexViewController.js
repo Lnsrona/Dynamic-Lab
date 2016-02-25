@@ -2,6 +2,7 @@ var IndexViewController = function (model,view) {
     this.dishType = "all";
     this.keyword = "";
     var controller = this;
+//    $(view.container).hide(200);
     
     this.show = function () {
         $(view.container).show(200);

@@ -1,4 +1,99 @@
 var MenuViewController = function (model,view) {
+    var controller = this;
+    this.menuCost = 0;
+    this.pendingCost = 0;
+//    $(view.container).hide(200);
+    view.menuPriceSum.text("0.00");
+    view.numPeopleInput.attr("value",model.getNumberOfGuests());
+    
+    view.numPeopleInput.change(function(){
+        var newNg = parseInt(this.value);
+        model.setNumberOfGuests(newNg);
+        // --------
+        g_dishController.reloadNumGuests();
+        controller.refreshMenuSumPrice();
+        view.pendingDishPrice.text(controller.pendingCost * newNg);
+        controller.refreshMenuListViewPrices(0,false);
+    });
+    
+    this.refreshMenuSumPrice = function()
+    {
+        var sumCost = model.getNumberOfGuests() * (controller.menuCost + controller.pendingCost);
+        view.menuPriceSum.text(sumCost);
+    };
+    
+    this.onMenuChanged = function(dish_id, is_add)
+    {
+        controller.menuCost = model.getTotalMenuPrice();
+        controller.refreshMenuSumPrice();
+        controller.refreshMenuListView(dish_id, is_add);
+    };
+    
+    this.setPendingDish = function(dish_id,price)
+    {
+        if (dish_id > 0)
+        {
+            //var dish = model.getDish(dish_id);
+            view.menuListView.find("#menu-dish-preview-"+dish_id).toggleClass("danger",true);
+        } else{
+            view.menuListView.find(".menuDishPriview").toggleClass("danger",false);
+        }
+        
+        // pending price per person
+        var ppp = parseFloat(price);
+        
+        controller.pendingCost = ppp;
+        
+        view.pendingDishPrice.text(model.getNumberOfGuests() * ppp);
+        var episilon = 0.01;
+
+        view.pendingRow.toggleClass("success",ppp > episilon);
+        view.pendingRow.toggleClass("danger",ppp < -episilon);
+
+        controller.refreshMenuSumPrice();
+    };
+    
+    this.refreshMenuListViewPrices = function()
+    {
+        var ng = model.getNumberOfGuests();
+        view.menuListView.find(".dish-price").each(function (idx, elem){
+            $(elem).text($(elem).data("price") * ng);
+        });
+    }
+    
+    this.refreshMenuListView = function (dish_id, is_add) {
+        if (dish_id && parseInt(dish_id) > 0)
+        {
+            if (is_add)
+            {
+                //$("li:not(:first-child)")
+                var dpHtml = instantiate(view.menuDishPreviewTemplate, model.getDish(dish_id));
+                view.pendingRow.before(dpHtml);
+                var item = view.menuListView.find("#menu-dish-preview-"+dish_id);
+                item.find(".dish-delete-btn").click(function () {
+                    var did = $(this).data("id");
+                    var is_add = !model.isDishInMenu(did);
+                    if (!is_add)
+                    {
+                        model.removeDishFromMenu(did);
+                        g_dishController.onDishRemovedFromMenu(did);
+                        controller.onMenuChanged(did,is_add);
+                    }
+                });
+            } else{
+                view.menuListView.find("#menu-dish-preview-"+dish_id).remove();
+            }
+        }
+        controller.refreshMenuListViewPrices();
+    };
+    
+    this.nextPage = function () {
+        g_resultController.show();
+    };
+    
+    view.menuConfirmBtn.click(this.nextPage);
+ 
+    
     // var refreshNumberOfGuests = function()
     // {
     //     view.numberOfGuests.html(model.getNumberOfGuests());  
@@ -26,4 +121,5 @@ var MenuViewController = function (model,view) {
     // };
     // view.plusButton.click(this.addGuest);
     // view.minusButton.click(this.removeGuest);
+    
 }
