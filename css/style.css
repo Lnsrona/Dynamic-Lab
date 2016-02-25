@@ -51,6 +51,17 @@ a:link {
     text-overflow: ellipsis;
 }
 
+.thumbnail .caption-price h4{
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
+}
+
+.dish-image-fix-width
+{
+    width: 100%;
+}
 
 .table tfoot tr th.vertical-mid {
     vertical-align: middle;

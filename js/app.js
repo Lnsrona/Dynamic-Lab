@@ -19,4 +19,6 @@ $(function() {
     g_menuView = new MenuView($("#menuPreviewPanel"));
     
     g_menuController = new MenuViewController(g_dataModel, g_menuView);
+    
+    g_resultController = new ResultViewController(g_dataModel);
 });

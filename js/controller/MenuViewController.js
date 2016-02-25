@@ -85,13 +85,14 @@ var MenuViewController = function (model,view) {
             }
         }
         controller.refreshMenuListViewPrices();
-        
-        this.nextPage = function () {
-            $("#MainPage").hide(200);
-            $("#ResultBar").show(200);
-        };
-        view.menuConfirmBtn.click(this.nextPage);
     };
+    
+    this.nextPage = function () {
+        g_resultController.show();
+    };
+    
+    view.menuConfirmBtn.click(this.nextPage);
+ 
     
     // var refreshNumberOfGuests = function()
     // {

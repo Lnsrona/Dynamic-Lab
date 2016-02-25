@@ -1,8 +1,8 @@
 var StartViewController = function (model,view){
 //    var controller = this;
     
-    $("#MainPage").hide(200);
-    $("#Page3").hide(200);
+    $("#MainPage").hide();
+    $("#ResultBar").hide();
     
     this.refresh = function () {
         $(view.container).hide(200);
