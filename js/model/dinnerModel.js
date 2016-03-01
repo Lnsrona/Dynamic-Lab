@@ -5,6 +5,8 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	this.numberGuests = 1;
     this.menuDishes = [];
+    this.api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
+
     
     this.caculateAllDishPrice = function()
     {
@@ -126,13 +128,27 @@ var DinnerModel = function() {
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
-	  for(var index in dishes){
-			if(dishes[index].id == id) {
-				return dishes[index];
-			}
-		}
+
+//         //We instantiate our model
+//         var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + this.api_key;
+//         var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + this.api_key;
+// 
+//         return $.get(url,null,"json");
+        
+          for(var index in dishes){
+        		if(dishes[index].id == id) {
+        			return dishes[index];
+        		}
+        	}
 	}
 
+	this.getDishAsync = function (id) {
+        //We instantiate our model
+        //var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + this.api_key;
+        var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + this.api_key;
+
+        return $.get(url,function(data){},"json");
+    }
 
 	// the dishes variable contains an array of all the 
 	// dishes in the database. each dish has id, name, type,
