@@ -15,7 +15,7 @@ var DinnerModel = function() {
 	this.numberGuests = 1;
     this.menuDishes = [];
     this.api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
-   
+    var _this = this;
     this.caculateAllDishPrice = function()
     {
         dishes.forEach(function (dish,idx,array) {
@@ -26,24 +26,24 @@ var DinnerModel = function() {
     };
 	
 	this.setNumberOfGuests = function(num) {
-		this.numberGuests = num;
+		_this.numberGuests = num;
 	};
 
 	// should return 
 	this.getNumberOfGuests = function() {
-		return this.numberGuests;
+		return _this.numberGuests;
 	};
 
 	//Returns the dish that is on the menu for selected type 
 	this.getSelectedDish = function(type) {
-		this.menuDishes.filter(function(index,dish) {
+		_this.menuDishes.filter(function(index,dish) {
 	  	return dish.type == type;
 	  });
 	};
 
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
-       return this.menuDishes;
+       return _this.menuDishes;
 	};
 
 	// Returns all ingredients for all the dishes on the menu.
@@ -75,15 +75,15 @@ var DinnerModel = function() {
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
         var sumPrice = 0;
-        this.getAllIngredients().forEach(function (ingred,index,array) {
-            sumPrice += ingred.price; // * ingred.quantity
-        });
+        sumPrice = _this.menuDishes.reduce(function(prevalue,dish,idx,arr){
+            return prevalue + dish.price;
+        },0);
         return sumPrice;
 	}
     
     this.isDishInMenu = function (id) {
-	  for(var index in this.menuDishes){
-			if(this.menuDishes[index].id == id) {
+	  for(var index in _this.menuDishes){
+			if(_this.menuDishes[index].RecipeID == id) {
 				return true;
 			}
 		}
@@ -92,18 +92,17 @@ var DinnerModel = function() {
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
-	this.addDishToMenu = function(id) {
-        if (this.isDishInMenu(id))
+	this.addDishToMenu = function(dish) {
+        if (_this.isDishInMenu(dish.RecipeID))
             return false;
-		this.menuDishes.push(this.getDish(id));
-        this.menuDishes.sort(function(a, b){return a.id - b.id});
-        return true;
-	}
+        _this.menuDishes.push(dish);
+        _this.menuDishes.sort(function(a, b){return a.id - b.id});
+ 	};
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
-        this.menuDishes.find(function (element, index, array){
-            if (element.id == id)
+        _this.menuDishes.find(function (element, index, array){
+            if (element.RecipeID == id)
             {
                 array.splice(index,1);
                 return true;
@@ -115,31 +114,31 @@ var DinnerModel = function() {
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
-	this.getAllDishes = function (type,filter) {
-        return $(dishes).filter(function(index,dish) {
-		var found = true;
-		if(filter && filter.length > 0){
-			found = false;
-			$.each(dish.ingredients,function(index,ingredient) {
-				if(ingredient.name.indexOf(filter)!=-1) {
-					found = true;
-				}
-			});
-			if(dish.name.indexOf(filter) != -1)
-			{
-				found = true;
-			}
-		}
-	  	return (type=="all" || dish.type == type) && found;
-	  });	
-	}
+	// this.getAllDishes = function (type,filter) {
+    //     return $(dishes).filter(function(index,dish) {
+	// 	var found = true;
+	// 	if(filter && filter.length > 0){
+	// 		found = false;
+	// 		$.each(dish.ingredients,function(index,ingredient) {
+	// 			if(ingredient.name.indexOf(filter)!=-1) {
+	// 				found = true;
+	// 			}
+	// 		});
+	// 		if(dish.name.indexOf(filter) != -1)
+	// 		{
+	// 			found = true;
+	// 		}
+	// 	}
+	//   	return (type=="all" || dish.type == type) && found;
+	//   });	
+	// }
     
     this.getAllDishesAsync = function (category,keyword) {
         if (keyword == null || keyword == "")
             keyword = "honey";
         var url = "http://api.bigoven.com/recipes?pg=1&rpp=24&title_kw="
                 + keyword 
-                + "&api_key=" + this.api_key;
+                + "&api_key=" + _this.api_key;
 
         return $.get(url,function(data){},"json").then(function donefilter(data) {
            var count = data.ResultCount;
@@ -150,25 +149,25 @@ var DinnerModel = function() {
     }
 
 	//function that returns a dish of specific ID
-	this.getDish = function (id) {
+// 	this.getDish = function (id) {
 
-//         //We instantiate our model
-//         var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + this.api_key;
-//         var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + this.api_key;
-// 
-//         return $.get(url,null,"json");
+// //         //We instantiate our model
+// //         var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + this.api_key;
+// //         var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + this.api_key;
+// // 
+// //         return $.get(url,null,"json");
         
-          for(var index in dishes){
-        		if(dishes[index].id == id) {
-        			return dishes[index];
-        		}
-        	}
-	}
+//           for(var index in dishes){
+//         		if(dishes[index].id == id) {
+//         			return dishes[index];
+//         		}
+//         	}
+// 	}
 
 	this.getDishAsync = function (id) {
         //We instantiate our model
         //var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + this.api_key;
-        var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + this.api_key;
+        var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + _this.api_key;
 
         return $.get(url,function(data){},"json").then(function filter(dish) {
             return caculateDishPrice(dish);
@@ -426,4 +425,4 @@ var DinnerModel = function() {
 		}
 	];
 
-}
+ }

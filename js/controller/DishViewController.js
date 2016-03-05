@@ -1,6 +1,6 @@
 var DishViewController = function (model, view) {
     
-    var controller = this;
+    var _this = this;
     this.dish = null;
     this.totalPrice = 0;
     this.isInMenu = false;
@@ -17,49 +17,49 @@ var DishViewController = function (model, view) {
             view.ingrediantsListView.append(ingrHtml);
         });
         
-        controller.totalPrice = 0;
+        _this.totalPrice = 0;
         $(".ingr-price").each(function(idx,elem){
             //var price = parseFloat($(elem).text()) * numGuests;
-            var price =  parseFloat($(elem).data("Quantity")) * numGuests;
+            var price =  parseFloat($(elem).data("price")) * numGuests;
             $(elem).text(price);
-            controller.totalPrice += price;
+            _this.totalPrice += price;
         });
         $(".ingr-quantity").each(function(idx,elem){
             //var price = parseFloat($(elem).text()) * numGuests;
-            var quantity =  parseFloat($(elem).data("Quantity")) * numGuests;
+            var quantity =  parseFloat($(elem).data("quantity")) * numGuests;
             $(elem).text(quantity);
         });      
 
-        view.dishPriceSum.text(controller.totalPrice);
+        view.dishPriceSum.text(_this.totalPrice);
     };
     
     this.reloadNumGuests = function () {
         var ng = model.getNumberOfGuests();
         view.dishNumGeustCount.text(ng);
-        controller.reloadIngredients();
+        _this.reloadIngredients();
     };
     
     this.onDishRemovedFromMenu = function(dish_id)
     {
-        if (controller.dish.id == dish_id)
+        if (_this.dish.RecipeID == dish_id)
         {
-            controller.isInMenu = model.isDishInMenu(dish_id);
-            controller.reloadConfirmButtonState();
+            _this.isInMenu = model.isDishInMenu(dish_id);
+            _this.reloadConfirmButtonState();
         }
     };
     
     this.reloadConfirmButtonState = function()
     {
-        view.dishConfirmBtn.toggleClass("btn-danger",controller.isInMenu);
-        view.dishConfirmBtn.toggleClass("btn-success",!controller.isInMenu)
-        if (controller.isInMenu)
+        view.dishConfirmBtn.toggleClass("btn-danger",_this.isInMenu);
+        view.dishConfirmBtn.toggleClass("btn-success",!_this.isInMenu)
+        if (_this.isInMenu)
         {
             view.dishConfirmBtn.text("Remove Dish");
-            g_menuController.setPendingDish(controller.dish.id,-controller.totalPrice);
+            g_menuController.setPendingDish(_this.dish.id,-_this.totalPrice);
         } else
         {
             view.dishConfirmBtn.text("Confirm Dish");
-            g_menuController.setPendingDish(controller.dish.id,controller.totalPrice);
+            g_menuController.setPendingDish(_this.dish.id,_this.totalPrice);
         }        
     };
     
@@ -75,31 +75,56 @@ var DishViewController = function (model, view) {
 //         view.dishDescription.text(this.dish.description);
 //         view.dishImage.attr("src", "images/" + this.dish.image);
         
-//         controller.isInMenu = model.isDishInMenu(dish_id);
+//         _this.isInMenu = model.isDishInMenu(dish_id);
 //         this.reloadNumGuests();
         
-//         controller.reloadConfirmButtonState();
+//         _this.reloadConfirmButtonState();
 //     };
 
+    this.showProgress = function()
+    {
+        //view.progressRing.show();
+        view.dishName.text("loading...");
+        view.dishDescription.text("");
+        view.dishImage.hide();
+        view.ingrediantsListView.hide();
+    };
+    
+    this.showResult = function()
+    {
+        view.dishImage.show();
+        view.ingrediantsListView.show();
+    };
+    
+    this.showError = function()
+    {
+        
+    };
+    
     this.loadDish = function (dish_id) {
         model.getDishAsync(dish_id).done(function (dish) {
-            controller.dish = dish;
+            _this.dish = dish;
+
+            _this.showResult();
+
             view.dishName.text(dish.Title);
             view.dishDescription.text(dish.Description);
             view.dishImage.attr("src",dish.ImageURL);
         
-            controller.isInMenu = model.isDishInMenu(dish_id);
-            controller.reloadNumGuests();
+            _this.isInMenu = model.isDishInMenu(dish_id);
+            _this.reloadNumGuests();
         
-            controller.reloadConfirmButtonState();
-            }).fail(function () {
-                alert("failed");
-            });
+            _this.reloadConfirmButtonState();
+        }).fail(function () {
+            _this.showError();
+        });
+        _this.showProgress();
+
     };
     
     this.showDish = function (dish_id) {
         $(view.container).show();
-        this.loadDish(dish_id);
+        _this.loadDish(dish_id);
     };
     
     this.hide = function () {
@@ -110,23 +135,23 @@ var DishViewController = function (model, view) {
     this.goBack = function()
     {
         g_menuController.setPendingDish(0,"0.00");
-        controller.hide();
+        _this.hide();
         g_indexController.show();
     };
     
     this.confirmDish = function () {
-        var did = controller.dish.id;
+        var did = _this.dish.RecipeID;
         var is_add = !model.isDishInMenu(did);
         
         if (!is_add)
             model.removeDishFromMenu(did);
         else
-            model.addDishToMenu(did);
+            model.addDishToMenu(_this.dish);
 
-        controller.onDishRemovedFromMenu(did);
+        _this.onDishRemovedFromMenu(did);
 
         g_menuController.onMenuChanged(did,is_add); 
-        controller.goBack();
+        _this.goBack();
     };
     
     view.dishBackBtn.click(this.goBack);

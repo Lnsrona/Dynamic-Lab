@@ -67,19 +67,22 @@ var MenuViewController = function (model,view) {
             if (is_add)
             {
                 //$("li:not(:first-child)")
-                var dpHtml = instantiate(view.menuDishPreviewTemplate, model.getDish(dish_id));
-                view.pendingRow.before(dpHtml);
-                var item = view.menuListView.find("#menu-dish-preview-"+dish_id);
-                item.find(".dish-delete-btn").click(function () {
-                    var did = $(this).data("id");
-                    var is_add = !model.isDishInMenu(did);
-                    if (!is_add)
-                    {
-                        model.removeDishFromMenu(did);
-                        g_dishController.onDishRemovedFromMenu(did);
-                        controller.onMenuChanged(did,is_add);
-                    }
+                model.getDishAsync(dish_id).done(function(dish){
+                    var dpHtml = instantiate(view.menuDishPreviewTemplate, dish);
+                    view.pendingRow.before(dpHtml);
+                    var item = view.menuListView.find("#menu-dish-preview-"+dish_id);
+                    item.find(".dish-delete-btn").click(function () {
+                        var did = $(this).data("id");
+                        var is_add = !model.isDishInMenu(did);
+                        if (!is_add)
+                        {
+                            model.removeDishFromMenu(did);
+                            g_dishController.onDishRemovedFromMenu(did);
+                            controller.onMenuChanged(did,is_add);
+                        }
+                    });
                 });
+                                       
             } else{
                 view.menuListView.find("#menu-dish-preview-"+dish_id).remove();
             }
