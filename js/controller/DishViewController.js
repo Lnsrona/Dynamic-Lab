@@ -19,11 +19,17 @@ var DishViewController = function (model, view) {
         
         controller.totalPrice = 0;
         $(".ingr-price").each(function(idx,elem){
-            var price = parseFloat($(elem).text()) * numGuests;
+            //var price = parseFloat($(elem).text()) * numGuests;
+            var price =  parseFloat($(elem).data("Quantity")) * numGuests;
             $(elem).text(price);
             controller.totalPrice += price;
         });
-        
+        $(".ingr-quantity").each(function(idx,elem){
+            //var price = parseFloat($(elem).text()) * numGuests;
+            var quantity =  parseFloat($(elem).data("Quantity")) * numGuests;
+            $(elem).text(quantity);
+        });      
+
         view.dishPriceSum.text(controller.totalPrice);
     };
     
@@ -76,17 +82,18 @@ var DishViewController = function (model, view) {
 //     };
 
     this.loadDish = function (dish_id) {
-        this.dish = model.getDishAsync(dish_id).done(function (data) {
-            view.dishName.text(this.dish.Title);
-            view.dishDescription.text(this.dish.Description);
-            view.dishImage.attr("this.dish.ImageURL");
+        model.getDishAsync(dish_id).done(function (dish) {
+            controller.dish = dish;
+            view.dishName.text(dish.Title);
+            view.dishDescription.text(dish.Description);
+            view.dishImage.attr("src",dish.ImageURL);
         
             controller.isInMenu = model.isDishInMenu(dish_id);
-            this.reloadNumGuests();
+            controller.reloadNumGuests();
         
             controller.reloadConfirmButtonState();
             }).fail(function () {
-            alert("failed");
+                alert("failed");
             });
     };
     

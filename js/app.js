@@ -1,15 +1,15 @@
 $(function() {
 	//We instantiate our model
-   var api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";//
-   var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&api_key=" + api_key;
-    
-//   var id = 530115;
-//   var url = "http://api.bigoven.com/recipe?pg=1&rpp=25&api_key=" + id + "?api_key=" + api_key;
-   $.get(url,function(data){},"json").done(function (data) {
-        alert("done ! " + JSON.stringify(data));
-    }).fail(function () {
-        alert("failed");
-    });
+//    var api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";//
+//    var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&api_key=" + api_key;
+//     
+// //   var id = 530115;
+// //   var url = "http://api.bigoven.com/recipe?pg=1&rpp=25&api_key=" + id + "?api_key=" + api_key;
+//    $.get(url,function(data){},"json").done(function (data) {
+//         alert("done ! " + JSON.stringify(data));
+//     }).fail(function () {
+//         alert("failed");
+//     });
     
 	g_dataModel = new DinnerModel();
 	g_dataModel.caculateAllDishPrice();    

@@ -112,14 +112,14 @@
                             <div class="row">
                                 <div id="dishesListView" class="list-view">
                                     <script class="item-template" id="dishPreviewTemplate" type="html">
-                                        <div id="dish_{id}" class="col-xs-6 col-md-3 list-view-item">
-                                            <a class="thumbnail dish-preview" data-id="{id}">
+                                        <div id="dish_{RecipeID}" class="col-xs-6 col-md-3 list-view-item">
+                                            <a class="thumbnail dish-preview" data-id="{RecipeID}">
                                                 <div class="cover">
-                                                    <img src="images/{image}"/>
+                                                    <img src="{ImageURL120}"/>
                                                 </div>
                                                 <div class="caption">
-                                                    <h4 class="panel-title">{name}</h4>
-                                                    <p>{description}</p>
+                                                    <h4 class="panel-title">{Title}</h4>
+                                                    <p>{StarRating}</p>
                                                 </div>
                                             </a>
                                         </div>
@@ -160,11 +160,11 @@
                                             </tfoot>
                                             <tbody id="ingrediantsListView" class="list-view">
                                                 <script class="item-template" id="ingrediantTrTemplate" type="html">
-                                                    <tr class="ingrediantRow">
-                                                        <td><span class="ingr-quantity">{quantity}</span>&nbsp;<span class="ingr-quant-uint">{unit}</span></td>
-                                                        <td class="ingr-name">{name}</td>
+                                                    <tr class="ingrediantRow" data-id="{IngredientID}">
+                                                        <td><span class="ingr-quantity" data-quantity="{Quantity}">{DisplayQuantity}</span>&nbsp;<span class="ingr-quant-uint">{Unit}</span></td>
+                                                        <td class="ingr-name">{Name}</td>
                                                         <td>SEK</td>
-                                                        <td class="ingr-price">{price}</td>
+                                                        <td class="ingr-price" data-price="{Quantity}">{Quantity}</td>
                                                     </tr>
                                                 </script>                
                                             </tbody>

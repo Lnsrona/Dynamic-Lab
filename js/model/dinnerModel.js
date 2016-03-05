@@ -1,4 +1,13 @@
 //DinnerModel Object constructor
+function caculateDishPrice(dish)
+{
+    dish.price = dish.Ingredients.reduce(function(previousValue, ingr, currentIndex, array){
+        return previousValue + ingr.Quantity * 1; 
+    }, 0);
+    
+    dish.Price = dish.price; 
+    return dish;
+};
 var DinnerModel = function() {
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
@@ -6,8 +15,7 @@ var DinnerModel = function() {
 	this.numberGuests = 1;
     this.menuDishes = [];
     this.api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
-
-    
+   
     this.caculateAllDishPrice = function()
     {
         dishes.forEach(function (dish,idx,array) {
@@ -108,7 +116,7 @@ var DinnerModel = function() {
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
 	this.getAllDishes = function (type,filter) {
-	  return $(dishes).filter(function(index,dish) {
+        return $(dishes).filter(function(index,dish) {
 		var found = true;
 		if(filter && filter.length > 0){
 			found = false;
@@ -126,24 +134,19 @@ var DinnerModel = function() {
 	  });	
 	}
     
-    this.getAllDishesAsync = function (type,filter) {
-        var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&api_key=" + this.api_key;
-        return $.get(url,function(data){},"json").done(this.filter(function(index,dish) {
-		var found = true;
-		if(filter && filter.length > 0){
-			found = false;
-			$.each(dish.ingredients,function(index,ingredient) {
-				if(ingredient.name.indexOf(filter)!=-1) {
-					found = true;
-				}
-			});
-			if(dish.name.indexOf(filter) != -1)
-			{
-				found = true;
-			}
-		}
-	  	return (type=="all" || dish.type == type) && found;
-	  }));	
+    this.getAllDishesAsync = function (category,keyword) {
+        if (keyword == null || keyword == "")
+            keyword = "honey";
+        var url = "http://api.bigoven.com/recipes?pg=1&rpp=24&title_kw="
+                + keyword 
+                + "&api_key=" + this.api_key;
+
+        return $.get(url,function(data){},"json").then(function donefilter(data) {
+           var count = data.ResultCount;
+           return $(data.Results).filter(function(index,dish) {
+                return category=="all" ||  dish.Category == category;
+		   });
+        });
     }
 
 	//function that returns a dish of specific ID
@@ -167,7 +170,9 @@ var DinnerModel = function() {
         //var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + this.api_key;
         var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + this.api_key;
 
-        return $.get(url,function(data){},"json");
+        return $.get(url,function(data){},"json").then(function filter(dish) {
+            return caculateDishPrice(dish);
+        });
     }
 
 	// the dishes variable contains an array of all the 
