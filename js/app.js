@@ -1,20 +1,24 @@
 $(function() {
 	//We instantiate our model
-    var api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
-    var get_dish_base = "http://api.bigoven.com/recipe/{id}?api_key=" + api_key;
+   var api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";//
+   var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&api_key=" + api_key;
     
-    var id = 530115;
-    var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + api_key;
-
-    
-	g_dataModel = new DinnerModel();
-	g_dataModel.caculateAllDishPrice();    
-
-    g_dataModel.getDishAsync(id).done(function (data) {
+//   var id = 530115;
+//   var url = "http://api.bigoven.com/recipe?pg=1&rpp=25&api_key=" + id + "?api_key=" + api_key;
+   $.get(url,function(data){},"json").done(function (data) {
         alert("done ! " + JSON.stringify(data));
     }).fail(function () {
         alert("failed");
     });
+    
+	g_dataModel = new DinnerModel();
+	g_dataModel.caculateAllDishPrice();    
+
+    // g_dataModel.getDishAsync(id).done(function (data) {
+    //     alert("done ! " + JSON.stringify(data));
+    // }).fail(function () {
+    //     alert("failed");
+    // });
     
 	//And create the needed controllers and views
 	g_startView = new StartView($("#StartView"));

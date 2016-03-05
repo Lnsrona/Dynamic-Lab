@@ -1,0 +1,32 @@
+http://api.bigoven.com/recipe/530115?api_key=r02x0R09O76JMCMc4nuM0PJXawUHpBUL
+
+http://api.bigoven.com/images?rid=530115&api_key=r02x0R09O76JMCMc4nuM0PJXawUHpBUL
+
+
+public async Task<string> GetStringSync(string url);
+
+public async Task<string> GetStringAsync(string url)
+{
+	return Thread.Create(GetStringSync,url);
+}
+
+async void fooo()
+{
+int a [100];
+var client = new HttpClient();
+var task = client.GetStringAsync("http://xxx");
+SetUIProgressing();
+await task; // task.Wait();
+SetUiFinish(task.Result);
+}
+
+
+void fooo()
+{
+int a [100];
+var client = new HttpClient();
+
+client.GetStringAsync("http://xxx").Then(SetUiFinish);
+
+SetUIProgressing();
+}

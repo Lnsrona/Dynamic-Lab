@@ -8,7 +8,7 @@ var DishViewController = function (model, view) {
     
     this.reloadIngredients = function()
     {
-        var ingredients = this.dish.ingredients;
+        var ingredients = this.dish.Ingredients;
         var numGuests = model.getNumberOfGuests();
         
         view.ingrediantsListView.empty();
@@ -57,17 +57,37 @@ var DishViewController = function (model, view) {
         }        
     };
     
-    this.loadDish = function (dish_id) {
-        this.dish = model.getDish(dish_id);
+//     this.loadDish = function (dish_id) {
+//         this.dish = g_dataModel.getDishAsync(dish_id).done(function (data) {
+//             alert("done ! " + JSON.stringify(data));
+//             }).fail(function () {
+//             alert("failed");
+//             });
+// //        this.dish = model.getDish(dish_id);
 
-        view.dishName.text(this.dish.name);
-        view.dishDescription.text(this.dish.description);
-        view.dishImage.attr("src", "images/" + this.dish.image);
+//         view.dishName.text(this.dish.name);
+//         view.dishDescription.text(this.dish.description);
+//         view.dishImage.attr("src", "images/" + this.dish.image);
         
-        controller.isInMenu = model.isDishInMenu(dish_id);
-        this.reloadNumGuests();
+//         controller.isInMenu = model.isDishInMenu(dish_id);
+//         this.reloadNumGuests();
         
-        controller.reloadConfirmButtonState();
+//         controller.reloadConfirmButtonState();
+//     };
+
+    this.loadDish = function (dish_id) {
+        this.dish = model.getDishAsync(dish_id).done(function (data) {
+            view.dishName.text(this.dish.Title);
+            view.dishDescription.text(this.dish.Description);
+            view.dishImage.attr("this.dish.ImageURL");
+        
+            controller.isInMenu = model.isDishInMenu(dish_id);
+            this.reloadNumGuests();
+        
+            controller.reloadConfirmButtonState();
+            }).fail(function () {
+            alert("failed");
+            });
     };
     
     this.showDish = function (dish_id) {

@@ -125,6 +125,26 @@ var DinnerModel = function() {
 	  	return (type=="all" || dish.type == type) && found;
 	  });	
 	}
+    
+    this.getAllDishesAsync = function (type,filter) {
+        var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&api_key=" + this.api_key;
+        return $.get(url,function(data){},"json").done(this.filter(function(index,dish) {
+		var found = true;
+		if(filter && filter.length > 0){
+			found = false;
+			$.each(dish.ingredients,function(index,ingredient) {
+				if(ingredient.name.indexOf(filter)!=-1) {
+					found = true;
+				}
+			});
+			if(dish.name.indexOf(filter) != -1)
+			{
+				found = true;
+			}
+		}
+	  	return (type=="all" || dish.type == type) && found;
+	  }));	
+    }
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
