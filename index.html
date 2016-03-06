@@ -65,10 +65,10 @@
                             </tfoot>
 							<tbody id="menuListView" class="list-view">
                                 <script class="item-template" id="menuDishPreviewTemplate" type="html">
-                                    <tr class="menuDishPriview" id="menu-dish-preview-{id}">                               
-                                        <td colspan="2" class="dish-name">{name}</td>                               
+                                    <tr class="menuDishPriview" id="menu-dish-preview-{RecipeID}">                               
+                                        <td colspan="2" class="dish-name">{Title}</td>                               
                                         <td colspan="2" class="dish-price" data-price="{price}">{price}</td>
-                                        <td colspan="0"><button type="button" class="close dish-delete-btn" aria-label="Close" data-id="{id}"><span aria-hidden="true">&times;</span></button></td>
+                                        <td colspan="0"><button type="button" class="close dish-delete-btn" aria-label="Close" data-id="{RecipeID}"><span aria-hidden="true">&times;</span></button></td>
                                     </tr>
                                 </script>                
                                 <tr id="pendingRow">
@@ -100,9 +100,9 @@
                                     <button id="searchButton" class="btn btn-primary" type="button"><div class="glyphicon glyphicon-search"></div></button>
                                     <button id="searchTypeDropdown" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchTypePreview">Type</span> <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dish-type" >starter</a></li>
-                                        <li><a class="dish-type" >main dish</a></li>
-                                        <li><a class="dish-type" >dessert</a></li>
+                                        <li><a class="dish-type" >Appetizers</a></li>
+                                        <li><a class="dish-type" >Main Dish</a></li>
+                                        <li><a class="dish-type" >Dessert</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a class="dish-type" >all</a></li>
                                     </ul>
@@ -112,14 +112,14 @@
                             <div class="row">
                                 <div id="dishesListView" class="list-view">
                                     <script class="item-template" id="dishPreviewTemplate" type="html">
-                                        <div id="dish_{id}" class="col-xs-6 col-md-3 list-view-item">
-                                            <a class="thumbnail dish-preview" data-id="{id}">
+                                        <div id="dish_{RecipeID}" class="col-xs-6 col-md-3 list-view-item">
+                                            <a class="thumbnail dish-preview" data-id="{RecipeID}">
                                                 <div class="cover">
-                                                    <img src="images/{image}"/>
+                                                    <img src="{ImageURL120}"/>
                                                 </div>
                                                 <div class="caption">
-                                                    <h4 class="panel-title">{name}</h4>
-                                                    <p>{description}</p>
+                                                    <h4 class="panel-title">{Title}</h4>
+<!--                                                <p>{Description}</p>-->
                                                 </div>
                                             </a>
                                         </div>
@@ -133,13 +133,13 @@
                 <div id="dishView" >
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title" id="dishName">{name}</h3>
+                            <h3 class="panel-title" id="dishName">{Title}</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img id="dishImg" data-src="images/{image}" />
-                                    <p id="dishDescription">{description}</p>
+                                    <img id="dishImg" data-src="{ImageURL}" />
+                                    <p id="dishDescription">{Description}</p>
                                     <button id="dishBackBtn" class="btn btn-default" type="">Back to select dish</button>
                                     <p>&nbsp;</p>
                                 </div>
@@ -160,11 +160,11 @@
                                             </tfoot>
                                             <tbody id="ingrediantsListView" class="list-view">
                                                 <script class="item-template" id="ingrediantTrTemplate" type="html">
-                                                    <tr class="ingrediantRow">
-                                                        <td><span class="ingr-quantity">{quantity}</span>&nbsp;<span class="ingr-quant-uint">{unit}</span></td>
-                                                        <td class="ingr-name">{name}</td>
+                                                    <tr class="ingrediantRow" data-id="{IngredientID}">
+                                                        <td><span class="ingr-quantity" data-quantity="{Quantity}">{DisplayQuantity}</span>&nbsp;<span class="ingr-quant-uint">{Unit}</span></td>
+                                                        <td class="ingr-name">{Name}</td>
                                                         <td>SEK</td>
-                                                        <td class="ingr-price">{price}</td>
+                                                        <td class="ingr-price" data-price="{Quantity}">{Quantity}</td>
                                                     </tr>
                                                 </script>                
                                             </tbody>
@@ -203,14 +203,14 @@
                     <div class="row">
                         <div id="dishesListView0" class="list-view">
                             <script class="item-template" id="dishPreview0Template" type="html">
-                                <div id="dish_{id}" class="col-xs-6 col-md-3 list-view-item">
-                                    <a class="thumbnail dish-preview" data-id="{id}">
+                                <div id="dish_{RecipeID}" class="col-xs-6 col-md-3 list-view-item">
+                                    <a class="thumbnail dish-preview" data-id="{RecipeID}">
                                         <div class="cover">
-                                            <img src="images/{image}"/>
+                                            <img src="{ImageURL}"/>
                                         </div>
                                         <div class="caption-price">
-                                            <h4 class="panel-title">{name}</h4>
-                                            <p align="center">{price} SEK</p>
+                                            <h4 class="panel-title">{Title}</h4>
+                                            <p align="center"><span class="f-price" data-price="{price}">{price}</span> SEK</p>
                                         </div>
                                     </a>
                                 </div>
@@ -231,15 +231,15 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-2">
-                                <img class="dish-image-fix-width" id="dishImg" src="images/{image}" />
+                                <img class="dish-image-fix-width" id="dishImg" src="{ImageURL}" />
                             </div>
                             <div class="col-md-4">
-                                <h4>{name}</h4>
-                                <p>{description}</p>
+                                <h4>{Title}</h4>
+                                <p>{Description}</p>
                             </div>
                             <div class="col-md-6">
                                 <h4>Preparation</h4>
-                                <p>{description}</p>
+                                <p>{Instructions}</p>
                             </div>
                         </div>
                     </li>

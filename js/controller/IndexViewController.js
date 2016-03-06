@@ -30,8 +30,13 @@ var IndexViewController = function (model,view) {
     };
     
     this.refreshView = function () {
-        var dishes = model.getAllDishes(controller.dishType,controller.keyword);
-        controller.reload(dishes);        
+        var dishes = model.getAllDishesAsync(controller.dishType,controller.keyword)
+        .done(function (data) {
+            controller.reload(data); 
+        }).fail(function () {
+            alert("failed");
+        });
+                       
     }
 
     // startup and refresh

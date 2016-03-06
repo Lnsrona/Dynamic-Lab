@@ -63,6 +63,16 @@ a:link {
     width: 100%;
 }
 
+#dishImg
+{
+    width:100%;
+}
+
+.dish-preview .cover img
+{
+    width:100%;
+}
+
 .table tfoot tr th.vertical-mid {
     vertical-align: middle;
 }
