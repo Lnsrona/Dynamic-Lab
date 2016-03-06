@@ -100,9 +100,9 @@
                                     <button id="searchButton" class="btn btn-primary" type="button"><div class="glyphicon glyphicon-search"></div></button>
                                     <button id="searchTypeDropdown" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchTypePreview">Type</span> <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dish-type" >starter</a></li>
-                                        <li><a class="dish-type" >main dish</a></li>
-                                        <li><a class="dish-type" >dessert</a></li>
+                                        <li><a class="dish-type" >Appetizers</a></li>
+                                        <li><a class="dish-type" >Main Dish</a></li>
+                                        <li><a class="dish-type" >Dessert</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a class="dish-type" >all</a></li>
                                     </ul>
@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="caption">
                                                     <h4 class="panel-title">{Title}</h4>
-                                                    <p>{StarRating}</p>
+<!--                                                <p>{Description}</p>-->
                                                 </div>
                                             </a>
                                         </div>
@@ -210,7 +210,7 @@
                                         </div>
                                         <div class="caption-price">
                                             <h4 class="panel-title">{Title}</h4>
-                                            <p align="center">{price} SEK</p>
+                                            <p align="center"><span class="f-price" data-price="{price}">{price}</span> SEK</p>
                                         </div>
                                     </a>
                                 </div>

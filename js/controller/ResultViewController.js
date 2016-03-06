@@ -4,7 +4,7 @@ var ResultViewController = function (model) {
     var goBackButton = container.find("#GoBack");
     var receiptButton = container.find("#ReceiptConfirmBtn");
     this.GeustCountTextBlock = container.find("#GeustCount");
-    this.totalPriceTextBlock = container.find("#totalPrice");
+    this.totalPriceTextBlock = container.find("#totalPrice"); 
     this.show = function()
     {
         $("#MainPage").hide();
@@ -15,7 +15,7 @@ var ResultViewController = function (model) {
         var pr = model.getTotalMenuPrice();
         var tp = ng * pr;
         controller.GeustCountTextBlock.text(ng);
-        controller.totalPriceTextBlock.text(tp);
+        controller.totalPriceTextBlock.text(tp.toFixed(2));
         controller.reload();
     };
     
@@ -30,6 +30,8 @@ var ResultViewController = function (model) {
     var finalTemplate = container.find("#finalTemplate").text();
     this.reload = function () {
         var dishes = model.getFullMenu();
+        var ng = model.getNumberOfGuests();
+        
         dishesListView0.empty();
         finalView.empty();
         dishes.forEach(function (dish) {
@@ -37,7 +39,16 @@ var ResultViewController = function (model) {
             dishesListView0.append(dishhtml0);
             var dishhtml1 = instantiate(finalTemplate,dish);
             finalView.append(dishhtml1);
+            
+           
         });
+        
+         $(".f-price").each(function(idx,elem){
+            var price =  parseFloat($(elem).data("price")) * ng;
+            $(elem).text(price.toFixed(2));
+            });
+            
+           
     };
      
     this.final = function () {

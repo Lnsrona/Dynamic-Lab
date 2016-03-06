@@ -12,7 +12,7 @@ $(function() {
 //     });
     
 	g_dataModel = new DinnerModel();
-	g_dataModel.caculateAllDishPrice();    
+//	g_dataModel.caculateAllDishPrice();    
 
     // g_dataModel.getDishAsync(id).done(function (data) {
     //     alert("done ! " + JSON.stringify(data));

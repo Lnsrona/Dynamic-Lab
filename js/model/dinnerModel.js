@@ -16,14 +16,14 @@ var DinnerModel = function() {
     this.menuDishes = [];
     this.api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
     var _this = this;
-    this.caculateAllDishPrice = function()
-    {
-        dishes.forEach(function (dish,idx,array) {
-            dish.price = dish.ingredients.reduce(function(previousValue, ingr, currentIndex, array){
-                return previousValue + ingr.price; 
-            }, 0);
-        })
-    };
+    // this.caculateAllDishPrice = function()
+    // {
+    //     dishes.forEach(function (dish,idx,array) {
+    //         dish.price = dish.ingredients.reduce(function(previousValue, ingr, currentIndex, array){
+    //             return previousValue + ingr.price.toFixed(2); 
+    //         }, 0);
+    //     })
+    // };
 	
 	this.setNumberOfGuests = function(num) {
 		_this.numberGuests = num;
@@ -143,7 +143,8 @@ var DinnerModel = function() {
         return $.get(url,function(data){},"json").then(function donefilter(data) {
            var count = data.ResultCount;
            return $(data.Results).filter(function(index,dish) {
-                return category=="all" ||  dish.Category == category;
+                
+                return (category=="all" ||  dish.Category == category) && dish.ImageURL120.indexOf("recipe-no-image") < 0;
 		   });
         });
     }

@@ -21,16 +21,16 @@ var DishViewController = function (model, view) {
         $(".ingr-price").each(function(idx,elem){
             //var price = parseFloat($(elem).text()) * numGuests;
             var price =  parseFloat($(elem).data("price")) * numGuests;
-            $(elem).text(price);
+            $(elem).text(price.toFixed(2));
             _this.totalPrice += price;
         });
         $(".ingr-quantity").each(function(idx,elem){
             //var price = parseFloat($(elem).text()) * numGuests;
             var quantity =  parseFloat($(elem).data("quantity")) * numGuests;
-            $(elem).text(quantity);
+            $(elem).text(quantity.toFixed(2));
         });      
 
-        view.dishPriceSum.text(_this.totalPrice);
+        view.dishPriceSum.text(_this.totalPrice.toFixed(2));
     };
     
     this.reloadNumGuests = function () {
@@ -55,11 +55,11 @@ var DishViewController = function (model, view) {
         if (_this.isInMenu)
         {
             view.dishConfirmBtn.text("Remove Dish");
-            g_menuController.setPendingDish(_this.dish.id,-_this.totalPrice);
+            g_menuController.setPendingDish(_this.dish.id,-_this.dish.price);
         } else
         {
             view.dishConfirmBtn.text("Confirm Dish");
-            g_menuController.setPendingDish(_this.dish.id,_this.totalPrice);
+            g_menuController.setPendingDish(_this.dish.id,_this.dish.price);
         }        
     };
     

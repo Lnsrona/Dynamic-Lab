@@ -12,14 +12,14 @@ var MenuViewController = function (model,view) {
         // --------
         g_dishController.reloadNumGuests();
         controller.refreshMenuSumPrice();
-        view.pendingDishPrice.text(controller.pendingCost * newNg);
-        controller.refreshMenuListViewPrices(0,false);
+        view.pendingDishPrice.text((controller.pendingCost * newNg).toFixed(2));
+        controller.refreshMenuListViewPrices();
     });
     
     this.refreshMenuSumPrice = function()
     {
         var sumCost = model.getNumberOfGuests() * (controller.menuCost + controller.pendingCost);
-        view.menuPriceSum.text(sumCost);
+        view.menuPriceSum.text(sumCost.toFixed(2));
     };
     
     this.onMenuChanged = function(dish_id, is_add)
@@ -27,10 +27,12 @@ var MenuViewController = function (model,view) {
         controller.menuCost = model.getTotalMenuPrice();
         controller.refreshMenuSumPrice();
         controller.refreshMenuListView(dish_id, is_add);
+        // setPendingDish(15,1000)
     };
     
     this.setPendingDish = function(dish_id,price)
     {
+        // assert(getDish(dish_id).price == price);
         if (dish_id > 0)
         {
             //var dish = model.getDish(dish_id);
@@ -44,7 +46,7 @@ var MenuViewController = function (model,view) {
         
         controller.pendingCost = ppp;
         
-        view.pendingDishPrice.text(model.getNumberOfGuests() * ppp);
+        view.pendingDishPrice.text((model.getNumberOfGuests() * ppp).toFixed(2));
         var episilon = 0.01;
 
         view.pendingRow.toggleClass("success",ppp > episilon);
@@ -57,7 +59,7 @@ var MenuViewController = function (model,view) {
     {
         var ng = model.getNumberOfGuests();
         view.menuListView.find(".dish-price").each(function (idx, elem){
-            $(elem).text($(elem).data("price") * ng);
+            $(elem).text(($(elem).data("price") * ng).toFixed(2));
         });
     }
     
@@ -81,6 +83,7 @@ var MenuViewController = function (model,view) {
                             controller.onMenuChanged(did,is_add);
                         }
                     });
+                    controller.refreshMenuListViewPrices();
                 });
                                        
             } else{
