@@ -4,21 +4,11 @@
 // service is created first time it is needed and then just reuse it
 // the next time.
 
-function caculateDishPrice(dish)
-{
-    dish.price = dish.Ingredients.reduce(function(previousValue, ingr, currentIndex, array){
-        return previousValue + ingr.Quantity * 1; 
-    }, 0);
-    
-    dish.Price = dish.price; 
-    return dish;
-};
-
 dinnerPlannerApp.factory('Dinner',function ($resource) {
   
   this.numberGuests = 1;
   this.menuDishes = [];
-  this.api_key = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
+  this.YOUR_API_KEY = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
   var _this = this;
 
 
@@ -28,6 +18,15 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   this.getNumberOfGuests = function() {
     return numberOfGuest;
+  }
+  
+  this.caculateDishPrice = function(dish) {
+      dish.price = dish.Ingredients.reduce(function(previousValue, ingr, currentIndex, array){
+        return previousValue + ingr.Quantity * 1; 
+    }, 0);
+    
+    dish.Price = dish.price; 
+    return dish;
   }
 
 
@@ -107,21 +106,24 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
         });
 	};
     
-    this.getAllDishes = function (keyword) {
-        if (keyword == null || keyword == "")
-            keyword = "honey";
-        var url = "http://api.bigoven.com/recipes?pg=1&rpp=24&title_kw="
-                + keyword 
-                + "&api_key=" + _this.api_key;
-        return $resource('url');        
-    }     
+    this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:'YOUR_API_KEY'});
+    this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'YOUR_API_KEY'}); 
     
-    this.getDish = function (id) {    
-        var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + _this.api_key;  
-        _this.Dish = $resource('url');
-        caculateDishPrice(_this.dish);
-        return _this.Dish;
-    }
+    // this.getAllDishes = function (keyword) {
+    //     if (keyword == null || keyword == "")
+    //         keyword = "honey";
+    //     var url = "http://api.bigoven.com/recipes?pg=1&rpp=24&title_kw="
+    //             + keyword 
+    //             + "&api_key=" + _this.api_key;
+    //     return $resource('url');        
+    // }     
+    
+    // this.getDish = function (id) {    
+    //     var url = "http://api.bigoven.com/recipe/" + id + "?api_key=" + _this.api_key;  
+    //     _this.Dish = $resource('url');
+    //     caculateDishPrice(_this.dish);
+    //     return _this.Dish;
+    // }
     
 
   // Angular service needs to return an object that has all the
