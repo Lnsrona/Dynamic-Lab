@@ -1,5 +1,47 @@
 <!-- We include the sidebar as it is shared across two screens. -->
 <ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
+<div class="container">
+     <div class="row">
+        <div class="col-md-9" >
+                <div id="IndexView" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span >Select Dishes</span>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <input id="searchKeywordInput" type="text" class="form-control" aria-label="Dish's name here" placeholder="Dish's name...">
+                                <span class="input-group-btn">
+                                    <button id="searchButton" class="btn btn-primary" type="button"><div class="glyphicon glyphicon-search"></div></button>                            
+                                </span>
+                            </div>                            
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div id="dishesListView" class="list-view">
+                                    <script class="item-template" id="dishPreviewTemplate" type="html">
+                                        <div id="dish_{RecipeID}" class="col-xs-6 col-md-3 list-view-item">
+                                            <a class="thumbnail dish-preview" data-id="{RecipeID}">
+                                                <div class="cover">
+                                                    <img src="{ImageURL120}"/>
+                                                </div>
+                                                <div class="caption">
+                                                    <h4 class="panel-title">{Title}</h4>
+            <!--                                                <p>{Description}</p>-->
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </script>                                                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
 not support it in free version) and list all the dishes that match the search. -->
